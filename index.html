@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HardTopNet GitHub projects portal</title>
+    <style>
+        body {
+            font-family: Roboto;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header p {
+            font-weight: bold;
+        }
+
+        .projects h2 {
+            margin-top: 64px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 28px;
+        }
+        
+        .projects .project {
+            margin-bottom: 2px;
+        }
+
+        .projects .project a {
+            text-decoration: none;
+            color: #007bff;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .projects .project a h3 {
+            padding-left: 24px;
+            margin: 32px 0px 0px 0px
+        }
+
+        .projects .project p {
+            margin-top: 8px;
+            margin-bottom: 2px;
+            padding-left: 48px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 96px;
+            border-top: 1px solid #666;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HardTopNet GitHub projects portal</h1>
+        <p>This portal provides access to various GitHub projects maintained by HardTopNet. Explore the repositories to find tools, libraries, and resources for your development needs.</p>
+    </header>
+    <main>
+        <section class="projects">
+            <h2>AI projects</h2>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/benchmarkpy"><h3>BenchmarkPy</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Simple command-line tool for benchmarking LLMs.
+                    <br>Supports Ollama and integrated transformers models.
+                    <br><b>Language:</b> Python
+                </p>
+            </div>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/copy-model-cli"><h3>copy-model-cli</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Command-line tool for managing Ollama models.
+                    <br>Lists, copies, and deletes models. Copy uses manifests to detect relevant blobs.
+                    <br><b>Language:</b> Python
+                </p>
+            </div>
+
+            <h2>Misc tools</h2>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/WinOCR_cli"><h3>WinOCR_cli</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Command-line OCR tool for Windows that leverages the Windows internal OCR capabilities.
+                    <br>Supports multiple languages.
+                    <br><b>Language:</b> Python
+                </p>
+            </div>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/LogFileTrigger"><h3>LogFileTrigger</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Monitor log files and trigger actions based on log content.
+                    <br>Uses a simple pattern matching approach.
+                    <br><b>Language:</b> C#/.NET
+                </p>
+            </div>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/FileWatcherExec"><h3>FileWatcherExec</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Monitor file system changes and trigger actions based on file events.
+                    <br>Uses a simple pattern matching approach.
+                    <br><b>Language:</b> C#/.NET
+                </p>
+            </div>
+
+            <div class="project">
+                <a href="https://github.com/hardtopnet/CertificateExpirationWatcher"><h3>CertificateExpirationWatcher</h3></a>
+                <p>
+                    <b>Description:</b>
+                    <br>Monitor SSL certificate expiration and send alerts by email.
+                    <br>Supports multiple domains, and allows multiple reminder intervals.
+                    <br><i>I designed this tool when Let's Encrypt stopped sending reminders to free accounts.</i>
+                    <br><b>Language:</b> C#/.NET, Docker
+                </p>
+            </div>
+        </section>  
+    </main>
+    <footer>
+        <p>HardTopNet 2025</p>
+    </footer>
+</body>
+</html>
