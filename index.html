@@ -5,11 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HardTopNet GitHub projects portal</title>
     <style>
-        body {
-            font-family: Roboto;
-            margin: 40px;
-            line-height: 1.6;
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+        :root {
+            --bg-color: #353535;
+            --color: #bbbbbb;
+            --link-color: #6ab2ff;
+            --footer-color: #777777;
         }
+
+        body {
+            color: var(--color);
+            background-color: var(--bg-color);
+            font-family: "Roboto", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings:
+                "slnt" 0,
+                "wdth" 100,
+                "GRAD" 0,
+                "XOPQ" 96,
+                "XTRA" 468,
+                "YOPQ" 79,
+                "YTAS" 750,
+                "YTDE" -203,
+                "YTFI" 738,
+                "YTLC" 514,
+                "YTUC" 712;
+            margin: 40px;
+            line-height: 1.2;
+        }
+
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -20,27 +46,24 @@
 
         .projects h2 {
             margin-top: 64px;
-            border-bottom: 2px solid #000;
+            border-bottom: 2px solid var(--color);
             padding-bottom: 4px;
             margin-bottom: 28px;
         }
-        
+
         .projects .project {
             margin-bottom: 2px;
         }
-
         .projects .project a {
             text-decoration: none;
-            color: #007bff;
+            color: var(--link-color);
             margin-bottom: 0px;
             padding-bottom: 0px;
         }
-
         .projects .project a h3 {
             padding-left: 24px;
             margin: 32px 0px 0px 0px
         }
-
         .projects .project p {
             margin-top: 8px;
             margin-bottom: 2px;
@@ -50,9 +73,9 @@
         footer {
             text-align: center;
             margin-top: 96px;
-            border-top: 1px solid #666;
+            border-top: 1px solid var(--footer-color);
             font-size: 0.9em;
-            color: #666;
+            color: var(--footer-color);
         }
     </style>
 </head>
