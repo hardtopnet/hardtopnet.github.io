@@ -114,6 +114,10 @@
             cursor: pointer;
             user-select: none;
         }
+        .projects a.project {
+            text-decoration: none;
+            color: inherit;
+        }
         .projects .project h3 {
             margin: 0px 0px 24px 0px;
             font-size: 1.5em;
@@ -157,11 +161,9 @@
             const safeTitle = String(title);
             const safeLanguage = String(language);
 
-            const div = document.createElement("div");
+            const div = document.createElement("a");
             div.className = "project";
-            div.addEventListener("click", () => {
-                window.location.assign(safeUrl);
-            });
+            div.href = safeUrl;
 
             const h3 = document.createElement("h3");
             h3.textContent = safeTitle;
