@@ -7,13 +7,24 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
         :root {
-            --bg-color: #353535;
+            --column-width: 75vw;
+            --column-side-padding: 36px;
+            --column-bg-color: #404040;
+
+            --bg-color: #313131;
             --color: #bbbbbb;
-            --link-color: #6ab2ff;
+            --title-color: rgb(100, 179, 84);
+            --project-title-color: rgb(77, 151, 64);
             --footer-color: #777777;
+
+            --card-bg-color: #272727;
+            --card-size: 43%;
         }
 
         body {
+            margin: 0;
+            padding: 0;
+            display: flow-root; /* stoppe le collapsing */
             color: var(--color);
             background-color: var(--bg-color);
             font-family: "Roboto", sans-serif;
@@ -32,42 +43,87 @@
                 "YTFI" 738,
                 "YTLC" 514,
                 "YTUC" 712;
-            margin: 40px;
             line-height: 1.2;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 40px;
+            text-align: left;
+            color: var(--title-color);
+            background-color: var(--card-bg-color);
+            width: var(--column-width);
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            padding: 32px var(--column-side-padding) 24px var(--column-side-padding);
+            margin: 0px;
+        }
+        header h1 {
+            margin-top: 0;
+            padding-left: 4vw;
         }
         header p {
             font-weight: bold;
+            padding-left: 4vw;
+        }
+        main {
+            padding-top: 24px;
+        }
+        .body-column {
+            background-color: var(--column-bg-color);
+            width: var(--column-width);
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            padding: 0px var(--column-side-padding);
+        }
+
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 24px;
+            row-gap: 32px;
+            align-items: stretch;
+            justify-content: center;
         }
 
         .projects h2 {
-            margin-top: 64px;
-            border-bottom: 2px solid var(--color);
-            padding-bottom: 4px;
-            margin-bottom: 28px;
+            margin-top: 48px;
+            margin-bottom: 4px;
+            border-bottom: 2px solid var(--title-color);
+            padding-bottom: 8px;
+            flex: 0 0 100%;
+            font-size: 1.9em;
+            color: var(--title-color);
+        }
+
+        .projects .note {
+            flex: 0 0 100%;
+            margin: 0px 0px 8px 0px;
+            font-size: 1.2em;
+            font-weight: bold;
         }
 
         .projects .project {
-            margin-bottom: 2px;
+            background-color: var(--card-bg-color);
+            margin: 0;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+            width: var(--card-size);
+            flex: 0 0 var(--card-size);
+            cursor: pointer;
+            user-select: none;
         }
-        .projects .project a {
-            text-decoration: none;
-            color: var(--link-color);
-            margin-bottom: 0px;
-            padding-bottom: 0px;
-        }
-        .projects .project a h3 {
-            padding-left: 24px;
-            margin: 32px 0px 0px 0px
+        .projects .project h3 {
+            margin: 0px 0px 24px 0px;
+            font-size: 1.5em;
+            color: var(--project-title-color);
         }
         .projects .project p {
-            margin-top: 8px;
-            margin-bottom: 2px;
-            padding-left: 48px;
+            margin: 0px;
+        }
+        .projects .project .description-text {
+            margin: 12px 12px 28px 12px;
         }
 
         footer {
@@ -76,96 +132,187 @@
             border-top: 1px solid var(--footer-color);
             font-size: 0.9em;
             color: var(--footer-color);
+            padding-bottom: 16px;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                width: 92vw;
+            }
+
+            .projects {
+                column-gap: 16px;
+                row-gap: 24px;
+            }
+
+            .projects .project {
+                width: 100%;
+                flex: 0 0 100%;
+            }
         }
     </style>
+    <script>
+        function createCard(url, title, descriptionLines, language) {
+            const safeUrl = String(url);
+            const safeTitle = String(title);
+            const safeLanguage = String(language);
+
+            const div = document.createElement("div");
+            div.className = "project";
+            div.addEventListener("click", () => {
+                window.location.assign(safeUrl);
+            });
+
+            const h3 = document.createElement("h3");
+            h3.textContent = safeTitle;
+
+            const divContents = document.createElement("div");
+
+            const pDesc = document.createElement("p");
+            const bDesc = document.createElement("b");
+            bDesc.textContent = "Description:";
+            pDesc.appendChild(bDesc);
+            divContents.appendChild(pDesc);
+
+            const descText = document.createElement("div");
+            descText.className = "description-text";
+            for (const line of descriptionLines) {
+                p = document.createElement("p");
+                textNode = document.createTextNode(String(line));
+                p.appendChild(textNode);
+                descText.appendChild(p);
+            }
+            divContents.appendChild(descText);
+
+            const pLang = document.createElement("p");
+            const bLang = document.createElement("b");
+            bLang.textContent = "Language:";
+            pLang.appendChild(bLang);
+            pLang.appendChild(document.createTextNode(` ${safeLanguage}`));
+            divContents.appendChild(pLang);
+
+            div.appendChild(h3);
+            div.appendChild(divContents);
+
+            return div;
+        }
+
+        function appendCard(url, title, descriptionLines, language) {
+            const card = createCard(url, title, descriptionLines, language);
+            document.querySelector('.projects').innerHTML += card.outerHTML;
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>HardTopNet GitHub projects portal</h1>
-        <p>This portal provides access to various GitHub projects maintained by HardTopNet. Explore the repositories to find tools, libraries, and resources for your development needs.</p>
+        <p>This portal provides access to various GitHub projects maintained by HardTopNet.
+            <br>Explore the repositories to find tools, libraries, and resources for your development needs.</p>
     </header>
-    <main>
-        <section class="projects">
-            <h2>AI projects</h2>
+    <div class="body-column">
+        <main>
+            <section class="projects">
+                <h2>AI projects</h2>
+                <p class="note">These tools are being developed as part of a larger AI ecosystem. I decided to release some parts as standalone programs</p>
+                <script>
+                    appendCard(
+                        "https://github.com/hardtopnet/TopazPhotoAI",
+                        "Topaz Photo AI API",
+                        [
+                            "API server to remotely process images with a local Topaz Photo AI installation.",
+                            "Also provides a graphical UI and a CLI.",
+                        ],
+                        "Python",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/benchmarkpy",
+                        "BenchmarkPy",
+                        [
+                            "Simple command-line tool for benchmarking LLMs",
+                            "Supports Ollama and integrated transformers models",
+                        ],
+                        "Python",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/copy-model-cli",
+                        "copy-model-cli",
+                        [
+                            "Command-line tool for managing Ollama models",
+                            "Lists, copies, and deletes models. Copy uses manifests to detect relevant blobs",
+                        ],
+                        "Python",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/hf-download",
+                        "hf-download",
+                        [
+                            "Command-line and GUI tool to download HuggingFace models",
+                            "When providing a HF repository, downloads the specified model to a custom path on disk",
+                        ],
+                        "Python",
+                    );
+                </script>
+                
+                <h2>Steam tools</h2>
 
-            <div class="project">
-                <a href="https://github.com/hardtopnet/benchmarkpy"><h3>BenchmarkPy</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Simple command-line tool for benchmarking LLMs.
-                    <br>Supports Ollama and integrated transformers models.
-                    <br><b>Language:</b> Python
-                </p>
-            </div>
+                <script>
+                    appendCard(
+                        "https://github.com/hardtopnet/SteamTools",
+                        "SteamTools",
+                        [
+                            "This is a collection of command-line tools for managing Steam resources",
+                            "Current feature gets Steam game name from AppID, using Steam API, Steam page scraping, or SteamCharts",
+                        ],
+                        "C#/.NET",
+                    );
+                </script>
 
-            <div class="project">
-                <a href="https://github.com/hardtopnet/copy-model-cli"><h3>copy-model-cli</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Command-line tool for managing Ollama models.
-                    <br>Lists, copies, and deletes models. Copy uses manifests to detect relevant blobs.
-                    <br><b>Language:</b> Python
-                </p>
-            </div>
-            
-            <h2>Steam tools</h2>
+                <h2>Misc tools</h2>
 
-            <div class="project">
-                <a href="https://github.com/hardtopnet/SteamTools"><h3>SteamTools</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>This is a collection of command-line tools for managing Steam resources.
-                    <br>Current feature gets Steam game name from AppID, using Steam API, Steam page scraping, or SteamCharts.
-                    <br><b>Language:</b> C#/.NET
-                </p>
-            </div>
-
-            <h2>Misc tools</h2>
-
-            <div class="project">
-                <a href="https://github.com/hardtopnet/WinOCR_cli"><h3>WinOCR_cli</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Command-line OCR tool for Windows that leverages the Windows internal OCR capabilities.
-                    <br>Supports multiple languages.
-                    <br><b>Language:</b> Python
-                </p>
-            </div>
-
-            <div class="project">
-                <a href="https://github.com/hardtopnet/LogFileTrigger"><h3>LogFileTrigger</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Monitor log files and trigger actions based on log content.
-                    <br>Uses a simple pattern matching approach.
-                    <br><b>Language:</b> C#/.NET
-                </p>
-            </div>
-
-            <div class="project">
-                <a href="https://github.com/hardtopnet/FileWatcherExec"><h3>FileWatcherExec</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Monitor file system changes and trigger actions based on file events.
-                    <br>Uses a simple pattern matching approach.
-                    <br><b>Language:</b> C#/.NET
-                </p>
-            </div>
-
-            <div class="project">
-                <a href="https://github.com/hardtopnet/CertificateExpirationWatcher"><h3>CertificateExpirationWatcher</h3></a>
-                <p>
-                    <b>Description:</b>
-                    <br>Monitor SSL certificate expiration and send alerts by email.
-                    <br>Supports multiple domains, and allows multiple reminder intervals.
-                    <br><i>I designed this tool when Let's Encrypt stopped sending reminders to free accounts.</i>
-                    <br><b>Language:</b> C#/.NET, Docker
-                </p>
-            </div>
-        </section>  
-    </main>
-    <footer>
-        <p>HardTopNet 2025</p>
-    </footer>
+                <script>
+                    appendCard(
+                        "https://github.com/hardtopnet/WinOCR_cli",
+                        "WinOCR_cli",
+                        [
+                            "Command-line OCR tool for Windows that leverages the Windows internal OCR capabilities",
+                            "Supports multiple languages",
+                        ],
+                        "Python",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/LogFileTrigger",
+                        "LogFileTrigger",
+                        [
+                            "Monitor log files and trigger actions based on log content",
+                            "Uses a simple pattern matching approach",
+                        ],
+                        "C#/.NET",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/FileWatcherExec",
+                        "FileWatcherExec",
+                        [
+                            "Monitor file system changes and trigger actions based on file events",
+                            "Uses a simple pattern matching approach",
+                        ],
+                        "C#/.NET",
+                    );
+                    appendCard(
+                        "https://github.com/hardtopnet/CertificateExpirationWatcher",
+                        "CertificateExpirationWatcher",
+                        [
+                            "Monitor SSL certificate expiration and send alerts by email",
+                            "Supports multiple domains, and allows multiple reminder intervals",
+                            "I designed this tool when Let's Encrypt stopped sending reminders to free accounts",
+                        ],
+                        "C#/.NET, Docker",
+                    );
+                </script>
+            </section>  
+        </main>
+        <footer>
+            <p>HardTopNet 2025-2026</p>
+        </footer>
+    </div>
 </body>
 </html>
